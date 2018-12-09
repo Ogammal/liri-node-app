@@ -39,20 +39,56 @@ findBand = function() {
             "Venue Name: " + jsonData.venue.name,
             "Venue Location: " + jsonData.venue.city,
             "Date of Event: " + moment(jsonData.datetime).format('MM/DD/YYYY'),
-            ].join("\n");
+        ].join("\n");
 
-            console.log(showData);
+        console.log(showData);
     })
 };
 
-// function findSong() {
-    
-// }
+findSong = function() {
+    if (argument == "") {
+        argument = "The Sign"
+    }
+    spotify.search({ 
+        type: 'track', 
+        query: argument
+    }, function(err, data) {
+        if (err) {
+          return console.log('Error occurred: ' + err);
+        }
+
+        var jsonData = data.tracks.items[0]
+        var showData = [
+            "Artist: " + jsonData.artists[0].name,
+            "Song Name: " + jsonData.name,
+            "Preview Link: " + jsonData.preview_url,
+            "Album: " + jsonData.album.name,
+        ].join("\n");
+        console.log(showData)
+    });
+}
+
+findMovie = function() {
+    if (argument === "") {
+        argument = "Mr. Nobody"
+    }
+    var URL = "http://www.omdbapi.com/?apikey=trilogy&t=" + argument;
+
+    axios.get(URL).then(function(response) {
+        var jsonData = response.data
+        var showData = [
+            "Title: " + jsonData.Title,
+            "Year: " + jsonData.Year,
+            "IMDB Rating: " + jsonData.Ratings[0].Value,
+            "IMDB Rating: " + jsonData.Ratings[1].Value,
+            "Country: " + jsonData.Country,
+            "Language: " + jsonData.Language,
+            "Plot: " + jsonData.Plot,
+            "Actors: " + jsonData.Actors,
+        ].join("\n");
+
+        console.log(showData);
+    })  
+};
 
 search();
-
-// var URL = "https://rest.bandsintown.com/artists/drake/events?app_id=codingbootcamp";
-
-//     axios.get(URL).then(function(response) {
-//         console.log(response.data[0].venue.name)
-//     });
