@@ -27,6 +27,10 @@ function search() {
         case "movie-this":
         findMovie();
         break;
+
+        case "do-what-it-says":
+        read();
+        break;
     }
 };
 
@@ -90,5 +94,14 @@ findMovie = function() {
         console.log(showData);
     })  
 };
+
+read = function() {
+    fs.readFile('./random.txt', 'UTF8', function(err, data) {
+        if (err) throw err;
+        fromText = data.split(",")
+    });
+    console.log(fromText)
+    // search();
+}
 
 search();
