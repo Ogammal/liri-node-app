@@ -100,9 +100,10 @@ function findRandom() {
         if (err) {
             throw err;
         }
-        command = data.substring(0, data.indexOf(","));
-        request = data.substring(data.indexOf(",") + 2, data.length - 1);
-        console.log(command + request)
+        action = data.substring(0, data.indexOf(","));
+        argument = data.substring(data.indexOf(",") + 2, data.length - 1);
+        console.log(action + " " + argument)
+        search();
     })  
 }
 
