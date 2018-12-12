@@ -29,7 +29,7 @@ function search() {
         break;
 
         case "do-what-it-says":
-        read();
+        findRandom();
         break;
     }
 };
@@ -95,13 +95,15 @@ findMovie = function() {
     })  
 };
 
-read = function() {
-    fs.readFile('./random.txt', 'UTF8', function(err, data) {
-        if (err) throw err;
-        fromText = data.split(",")
-    });
-    console.log(fromText)
-    // search();
+function findRandom() {
+    fs.readFile("./random.txt", "utf8",function(err, data) {
+        if (err) {
+            throw err;
+        }
+        command = data.substring(0, data.indexOf(","));
+        request = data.substring(data.indexOf(",") + 2, data.length - 1);
+        console.log(command + request)
+    })  
 }
 
 search();
